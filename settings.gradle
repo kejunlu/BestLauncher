@@ -1,0 +1,2 @@
+include ':app', ':launcher'
+rootProject.name='BestLauncher'
