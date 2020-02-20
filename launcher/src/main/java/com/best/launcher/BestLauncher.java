@@ -1,5 +1,6 @@
 package com.best.launcher;
 
+import android.app.Application;
 import android.os.Looper;
 
 import com.best.launcher.executor.AsyncExecutor;

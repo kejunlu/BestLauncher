@@ -7,17 +7,16 @@ import com.best.launcher.task.LaunchTask;
 
 public class Logger {
     private static final String TAG = "BestLauncher";
-    static final String HALF_LINE_STRING = "==============================================";
-    static final String LINE_STRING_FORMAT = "| %s : %s ";
-    static final String MS_UNIT = "ms";
-    static final String TASK_INFO = "任务类名";
-    static final String THREAD_INFO = "线程信息";
-    static final String START_TIME = "开始时刻";
-    static final String START_UNTIL_RUNNING = "等待运行耗时";
-    static final String RUNNING_CONSUME = "运行任务耗时";
-    static final String MAIN_THREAD_TIME = "主线程总耗时";
-    static final String WRAPPED = "\n";
-    static final String BLANK = " ";
+    private static final String HALF_LINE_STRING = "==============================================";
+    private static final String LINE_STRING_FORMAT = "| %s : %s ";
+    private static final String MS_UNIT = "ms";
+    private static final String TASK_INFO = "任务类名";
+    private static final String THREAD_INFO = "线程信息";
+    private static final String START_UNTIL_RUNNING = "等待运行耗时";
+    private static final String RUNNING_CONSUME = "运行任务耗时";
+    private static final String MAIN_THREAD_TIME = "主线程总耗时";
+    private static final String WRAPPED = "\n";
+    private static final String BLANK = " ";
 
     static void d(Object obj) {
         d(TAG, obj);
@@ -59,7 +58,7 @@ public class Logger {
         addTaskInfoLineString(builder, MAIN_THREAD_TIME, executeTimeStr);
         builder.append(WRAPPED);
         builder.append(HALF_LINE_STRING);
-        e(TAG, builder.toString());
+        d(TAG, builder.toString());
 
     }
 
@@ -77,7 +76,7 @@ public class Logger {
         addTaskInfoLineString(builder, RUNNING_CONSUME, executeTimeStr);
         builder.append(WRAPPED);
         builder.append(HALF_LINE_STRING);
-        e(TAG, builder.toString());
+        d(TAG, builder.toString());
 
     }
 

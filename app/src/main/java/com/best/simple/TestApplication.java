@@ -3,7 +3,6 @@ package com.best.simple;
 import android.app.Application;
 
 import com.best.launcher.BestLauncher;
-import com.best.launcher.IBestLauncher;
 import com.best.launcher.util.ProcessUtils;
 
 /**

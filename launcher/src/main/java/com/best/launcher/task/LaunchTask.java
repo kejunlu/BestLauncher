@@ -13,7 +13,6 @@ import com.best.launcher.util.Logger;
  */
 public abstract class LaunchTask implements ILaunchTask {
 
-    protected final Application application;
     private static final int STATE_NEW = 0;
     private static final int STATE_RUNNING = 2;
     private static final int STATE_FINISHED = 3;
@@ -24,8 +23,7 @@ public abstract class LaunchTask implements ILaunchTask {
     private long mWaitingTime;
     private long mExecuteTime;
 
-    public LaunchTask(Application application) {
-        this.application = application;
+    public LaunchTask() {
         setNewTime(System.currentTimeMillis());
         markState(STATE_NEW);
     }

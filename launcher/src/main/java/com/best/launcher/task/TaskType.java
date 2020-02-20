@@ -8,8 +8,17 @@ package com.best.launcher.task;
  */
 public enum TaskType {
 
+    /**
+     * 主线程任务
+     */
     MAIN,
+    /**
+     * 异步任务
+     */
     ASYNC,
+    /**
+     * 延迟任务
+     */
     DELAY
 
 }
