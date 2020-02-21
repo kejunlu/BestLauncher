@@ -26,6 +26,7 @@ public class BestLauncher implements IBestLauncher {
     private static boolean sDebuggable = true;
     public static CountDownLatch mCountDownLatch;
 
+    private ILaunchTask mPreMainTask;
     private List<ILaunchTask> mMainTasks;
     private List<ILaunchTask> mAsyncTasks;
     private List<ILaunchTask> mDelayTasks;
@@ -37,6 +38,7 @@ public class BestLauncher implements IBestLauncher {
             throw new RuntimeException("BestLauncher#start should be invoke on MainThread!");
         }
         mMainThreadTime = System.currentTimeMillis();
+        executePreMainTask();
         executeAsyncTasks();
         executeMainTasks();
         executeDelayTasks();
@@ -54,6 +56,12 @@ public class BestLauncher implements IBestLauncher {
         }
         mMainThreadTime = System.currentTimeMillis() - mMainThreadTime;
         Logger.logBeshLauncher(this);
+    }
+
+    private void executePreMainTask() {
+        if(mPreMainTask != null) {
+            mPreMainTask.run();
+        }
     }
 
     private void executeAsyncTasks() {
@@ -98,6 +106,7 @@ public class BestLauncher implements IBestLauncher {
 
     public static final class Builder {
 
+        private ILaunchTask mPreMainTask;
         private List<ILaunchTask> mMainTasks;
         private List<ILaunchTask> mAsyncTasks;
         private List<ILaunchTask> mDelayTasks;
@@ -106,6 +115,15 @@ public class BestLauncher implements IBestLauncher {
             mMainTasks = new ArrayList<>();
             mAsyncTasks = new ArrayList<>();
             mDelayTasks = new ArrayList<>();
+        }
+
+        public Builder addPreLoadMainTask(LaunchTask task) {
+            if(mPreMainTask != null) {
+                throw new RuntimeException("Preload tasks have been added!");
+            }
+            task.setTaskType(TaskType.MAIN);
+            this.mPreMainTask = task;
+            return this;
         }
 
         public Builder addMainTask(LaunchTask task) {
@@ -128,6 +146,7 @@ public class BestLauncher implements IBestLauncher {
 
         private BestLauncher create() {
             BestLauncher launcher = new BestLauncher();
+            launcher.mPreMainTask = mPreMainTask;
             launcher.mMainTasks = mMainTasks;
             launcher.mAsyncTasks = mAsyncTasks;
             launcher.mDelayTasks = mDelayTasks;

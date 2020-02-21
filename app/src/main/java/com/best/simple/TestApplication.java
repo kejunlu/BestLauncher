@@ -18,7 +18,7 @@ public class TestApplication extends Application {
         super.onCreate();
         if (ProcessUtils.isMianProcess(this)) {
             new BestLauncher.Builder()
-                    .addMainTask(new MainTask())
+                    .addPreLoadMainTask(new MainTask())
                     .addMainTask(new MainTask2())
                     .addMainTask(new MainTask3())
                     .addAsyncTask(new AsyncTask1())

@@ -1,6 +1,7 @@
 package com.best.launcher.task;
 
 import android.app.Application;
+import android.os.Trace;
 
 import com.best.launcher.BestLauncher;
 import com.best.launcher.util.Logger;
@@ -45,6 +46,7 @@ public abstract class LaunchTask implements ILaunchTask {
 
     @Override
     public void run() {
+        Trace.beginSection(this.getClass().getName());
         android.os.Process.setThreadPriority(getThreadPriority());
         markState(STATE_RUNNING);
         try {
@@ -61,6 +63,7 @@ public abstract class LaunchTask implements ILaunchTask {
             }
         }
         markState(STATE_FINISHED);
+        Trace.endSection();
     }
 
     public long getWaitingTime() {
